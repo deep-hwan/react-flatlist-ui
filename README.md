@@ -1,4 +1,4 @@
-# <div align="right">
+# <div align="left">
 
 <h1>react-flatList-ui</h1>
 <img alt="Logo" align="right" src="./src/assets/flatlist-logo.svg" width="22%" />
