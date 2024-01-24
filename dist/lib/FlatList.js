@@ -32,7 +32,7 @@ exports.FlatList = (0, react_1.forwardRef)(function (props, ref) {
     var _p = (_a = props.size) !== null && _a !== void 0 ? _a : {}, _q = _p.width, width = _q === void 0 ? "100%" : _q, minWidth = _p.minWidth, maxWidth = _p.maxWidth;
     var _r = (_b = props.size) !== null && _b !== void 0 ? _b : {}, _s = _r.height, height = _s === void 0 ? "100%" : _s, minHeight = _r.minHeight, maxHeight = _r.maxHeight;
     var _t = (_c = props.display) !== null && _c !== void 0 ? _c : {}, reverse = _t.reverse, _u = _t.wrap, wrap = _u === void 0 ? "wrap" : _u, crossAlign = _t.crossAlign;
-    var _v = props.direction, direction = _v === void 0 ? "vertical" : _v, itemScrollbarView = props.itemScrollbarView, _w = props.padding, padding = _w === void 0 ? { all: 0 } : _w, _x = props.margin, margin = _x === void 0 ? { all: 0 } : _x;
+    var _v = props.direction, direction = _v === void 0 ? "vertical" : _v, listScrollbarView = props.listScrollbarView, _w = props.padding, padding = _w === void 0 ? { all: 0 } : _w, _x = props.margin, margin = _x === void 0 ? { all: 0 } : _x;
     var viewT = { width: width, height: height, minWidth: minWidth, maxWidth: maxWidth, minHeight: minHeight, maxHeight: maxHeight };
     var spaceT = (0, space_1.SpaceTheme)({ padding: padding, margin: margin });
     var FLEX_VARIANTS = {
@@ -62,7 +62,7 @@ exports.FlatList = (0, react_1.forwardRef)(function (props, ref) {
         columnGap: (_o = FLEX_VARIANTS[direction].columnGap) !== null && _o !== void 0 ? _o : 0,
     };
     // scrollTheme
-    var scrollbarStyle = "\n.customScrollbar::-webkit-scrollbar {\n  display: ".concat(itemScrollbarView ? "flex" : "none", ";\n  width: 5px;\n  height: 5px;\n}\n.customScrollbar::-webkit-scrollbar-track {\n  background-color: transparent;\n}\n.customScrollbar::-webkit-scrollbar-thumb {\n  background-color: #cccccc;\n  border-radius: 100px;\n}\n.customScrollbar::-webkit-scrollbar-thumb:hover {\n  background: #e2e2e2;\n}\n.customScrollbar::-webkit-scrollbar-button:start:decrement,\n.customScrollbar::-webkit-scrollbar-button:end:increment {\n  width: 0;\n  height: 0;\n  background-color: transparent;\n}\n");
+    var scrollbarStyle = "\n.customScrollbar::-webkit-scrollbar {\n  display: ".concat(listScrollbarView ? "flex" : "none", ";\n  width: 5px;\n  height: 5px;\n}\n.customScrollbar::-webkit-scrollbar-track {\n  background-color: transparent;\n}\n.customScrollbar::-webkit-scrollbar-thumb {\n  background-color: #cccccc;\n  border-radius: 100px;\n}\n.customScrollbar::-webkit-scrollbar-thumb:hover {\n  background: #e2e2e2;\n}\n.customScrollbar::-webkit-scrollbar-button:start:decrement,\n.customScrollbar::-webkit-scrollbar-button:end:increment {\n  width: 0;\n  height: 0;\n  background-color: transparent;\n}\n");
     // item Count
     var listItemCountThemes = GetSceenItemCount({
         itemHorizontalCount: itemHorizontalCount,
