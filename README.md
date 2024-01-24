@@ -112,6 +112,6 @@ MIT © Deepfactory, Inc. See [LICENSE](LICENSE) for details.
 <a title="DEEP" href="https://www.deepfactory.kr/">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./src/assets/deep-white.png">
-    <img alt="Toss" src="./src/assets/deep-dark.png" width="80">
+    <img alt="Toss" src="./src/assets/deep-dark.png" width="120">
   </picture>
 </a>
