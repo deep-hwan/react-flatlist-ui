@@ -60,16 +60,17 @@ import FlatList from 'react-flatList-ui';
 function App() {
   return (
     <FlatList
-      direction="horizontal"
-      data={dummyData}
-      dataCount={dummyData.length}
-      keyExtractor={(i) => i}
-      ListEmptyComponent={<p>Data does not exist ...</p>}
-      renderItem={(item) => <Item name={item.name} img={item.img} />}
-      itemHorizontalCount={{ desktop: 3, tablet: 2, mobile: 1 }}
+      direction="horizontal" // vertical or horizontal
+      data={dummyData} // data
+      dataCount={dummyData.length} // count
+      keyExtractor={(i) => i} // item key
+      renderItem={(item) => <Item name={item.name} img={item.img} />} // rendering items
+      itemHorizontalCount={{ desktop: 3, tablet: 2, mobile: 1 }} // if horizontal : media screen data count
+      ItemSeparatorComponent={{<div style={{width:'100%', height:1, backgroundColor:'#eeeeee'}}></div>}} //components between data
+      ListEmptyComponent={<p>Data does not exist ...</p>} // if noneData : view component
       gap={15}
       crossGap={15}
-      itemScrollbarView={false}
+      itemScrollbarView={false} // scrollbar
     />
   );
 }
