@@ -74,11 +74,11 @@ exports.FlatList = (0, react_1.forwardRef)(function (props, ref) {
         var _a;
         if (data && ((_a = props === null || props === void 0 ? void 0 : props.dataCount) !== null && _a !== void 0 ? _a : data.length) > 0) {
             return data
-                .map(function (item, index) { return ((0, jsx_runtime_1.jsxs)("li", { style: __assign(__assign({ display: "flex", flexDirection: "column", alignItems: "start" }, listItemCountThemes), { transition: "0.3s ease-in-out", padding: 0, margin: 0 }), children: [renderItem(item, index), props.ItemSeparatorComponent] }, props.keyExtractor(item, index))); })
+                .map(function (item, index) { return ((0, jsx_runtime_1.jsxs)("li", __assign({ style: __assign(__assign({ display: "flex", flexDirection: "column", alignItems: "start" }, listItemCountThemes), { transition: "0.3s ease-in-out", padding: 0, margin: 0 }) }, { children: [renderItem(item, index), props.ItemSeparatorComponent] }), props.keyExtractor(item, index))); })
                 .flat();
         }
         else {
-            return (0, jsx_runtime_1.jsx)("div", { style: { width: "100%" }, children: props.ListEmptyComponent });
+            return (0, jsx_runtime_1.jsx)("div", __assign({ style: { width: "100%" } }, { children: props.ListEmptyComponent }));
         }
     }, [
         data,

@@ -1,7 +1,7 @@
 import React from "react";
 import { FlatList } from "react-flatlist-ui";
 
-function App() {
+export default function App() {
   return (
     <div
       className="App"
@@ -45,8 +45,6 @@ function App() {
     </div>
   );
 }
-
-export default App;
 
 export const dummyData = [
   {
