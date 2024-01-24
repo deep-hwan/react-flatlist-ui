@@ -19,7 +19,7 @@ interface Props extends HTMLAttributes<HTMLUListElement>, SpaceType {
   ItemSeparatorComponent?: ReactElement;
   ListEmptyComponent?: ReactElement;
   size?: ViewportTypes;
-  itemScrollbarView?: boolean;
+  listScrollbarView?: boolean;
   itemGap?: number;
   itemCrossGap?: number;
   direction?: "horizontal" | "vertical";
@@ -45,7 +45,7 @@ export const FlatList = forwardRef<HTMLUListElement, Props>(
     const { reverse, wrap = "wrap", crossAlign } = props.display ?? {};
     const {
       direction = "vertical",
-      itemScrollbarView,
+      listScrollbarView,
       padding = { all: 0 },
       margin = { all: 0 },
     } = props;
@@ -84,7 +84,7 @@ export const FlatList = forwardRef<HTMLUListElement, Props>(
     // scrollTheme
     const scrollbarStyle = `
 .customScrollbar::-webkit-scrollbar {
-  display: ${itemScrollbarView ? "flex" : "none"};
+  display: ${listScrollbarView ? "flex" : "none"};
   width: 5px;
   height: 5px;
 }
