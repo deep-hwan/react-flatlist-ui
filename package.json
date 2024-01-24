@@ -1,0 +1,71 @@
+{
+  "name": "react-flatlist-ui",
+  "version": "0.1.8",
+  "private": false,
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "main": "dist/lib/index.js",
+  "types": "dist/lib/index.d.ts",
+  "browser": "./browser/specific/main.js",
+  "dependencies": {
+    "@testing-library/jest-dom": "^6.3.0",
+    "@testing-library/react": "^14.1.2",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/jest": "^29.5.11",
+    "@types/node": "^20.11.6",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-flatlist-ui": "^0.1.8",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^3.5.1"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "compile": "npm run clean && cross-env NODE_ENV=production babel src/lib --out-dir dist --copy-files",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "prepare": "rimraf dist && mkdir dist && tsc"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "description": "This method is very similar to FlatList in React-Native. Try FlatList in React.js right now",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deep-hwan/react-flatlist-ui"
+  },
+  "keywords": [
+    "typescript",
+    "Reactjs",
+    "react-flatlist",
+    "react-native-flatlist",
+    "flatlist-react",
+    "flatlist"
+  ],
+  "author": "deep",
+  "license": "ISC"
+}
