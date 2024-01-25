@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList } from "react-flatlist-ui";
+import { FlatList } from "./lib/FlatList";
 
 export default function App() {
   return (
@@ -22,10 +22,13 @@ export default function App() {
         }}
       >
         <FlatList
-          direction="horizontal"
           itemHorizontalCount={{ desktop: 3, tablet: 2, mobile: 1 }}
+          padding={{ all: 16 }}
+          margin={{ bottom: 20 }}
           data={dummyData}
           dataCount={dummyData.length}
+          ListHeaderComponent={<h1>Title: FlatList</h1>}
+          ListFooterComponent={<span>data finish ...</span>}
           ListEmptyComponent={<p>데이터가 존재하지 않습니다</p>}
           keyExtractor={(i) => i}
           renderItem={(item) => (

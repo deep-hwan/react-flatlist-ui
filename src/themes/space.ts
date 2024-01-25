@@ -38,14 +38,14 @@ export const SpaceTheme = ({ padding, margin }: SpaceType) => {
   const m_R = margin?.right;
 
   return {
-    paddingTop: (p_all && p_all) || (p_V && p_V) || (p_T && p_T),
-    paddingBottom: (p_all && p_all) || (p_V && p_V) || (p_B && p_B),
-    paddingLeft: (p_all && p_all) || (p_H && p_H) || (p_L && p_L),
-    paddingRight: (p_all && p_all) || (p_H && p_H) || (p_R && p_R),
+    paddingTop: ((p_all && p_all) || (p_V && p_V) || (p_T && p_T)) ?? 0,
+    paddingBottom: ((p_all && p_all) || (p_V && p_V) || (p_B && p_B)) ?? 0,
+    paddingLeft: ((p_all && p_all) || (p_H && p_H) || (p_L && p_L)) ?? 0,
+    paddingRight: ((p_all && p_all) || (p_H && p_H) || (p_R && p_R)) ?? 0,
 
-    marginTop: (m_all && m_all) || (m_V && m_V) || (m_T && m_T),
-    marginBottom: (m_all && m_all) || (m_V && m_V) || (m_B && m_B),
-    marginLeft: (m_all && m_all) || (m_H && m_H) || (m_L && m_L),
-    marginRight: (m_all && m_all) || (m_H && m_H) || (m_R && m_R),
+    marginTop: ((m_all && m_all) || (m_V && m_V) || (m_T && m_T)) ?? 0,
+    marginBottom: ((m_all && m_all) || (m_V && m_V) || (m_B && m_B)) ?? 0,
+    marginLeft: ((m_all && m_all) || (m_H && m_H) || (m_L && m_L)) ?? 0,
+    marginRight: ((m_all && m_all) || (m_H && m_H) || (m_R && m_R)) ?? 0,
   };
 };

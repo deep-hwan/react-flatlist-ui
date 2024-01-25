@@ -16,7 +16,9 @@ interface Props extends HTMLAttributes<HTMLUListElement>, SpaceType {
   itemHorizontalCount?: { desktop?: number; tablet?: number; mobile?: number };
   keyExtractor: (item?: any, index?: number) => string | number;
   renderItem: (item?: any, index?: number) => ReactElement;
+  ListFooterComponent?: ReactElement;
   ItemSeparatorComponent?: ReactElement;
+  ListHeaderComponent?: ReactElement;
   ListEmptyComponent?: ReactElement;
   size?: ViewportTypes;
   listScrollbarView?: boolean;
@@ -47,12 +49,14 @@ export const FlatList = forwardRef<HTMLUListElement, Props>(
       direction = "vertical",
       listScrollbarView,
       padding = { all: 0 },
-      margin = { all: 0 },
+      margin,
     } = props;
 
     const viewT = { width, height, minWidth, maxWidth, minHeight, maxHeight };
     const spaceT = SpaceTheme({ padding, margin });
 
+    //
+    // direction_variants
     const FLEX_VARIANTS = {
       horizontal: {
         flexDirection: reverse ? ("row-reverse" as const) : ("row" as const),
@@ -70,6 +74,7 @@ export const FlatList = forwardRef<HTMLUListElement, Props>(
       },
     };
 
+    //
     // displayTheme
     const displayThemes = {
       display: "flex",
@@ -81,6 +86,7 @@ export const FlatList = forwardRef<HTMLUListElement, Props>(
       columnGap: FLEX_VARIANTS[direction].columnGap ?? 0,
     };
 
+    //
     // scrollTheme
     const scrollbarStyle = `
 .customScrollbar::-webkit-scrollbar {
@@ -106,6 +112,7 @@ export const FlatList = forwardRef<HTMLUListElement, Props>(
 }
 `;
 
+    //
     // item Count
     const listItemCountThemes = GetSceenItemCount({
       itemHorizontalCount,
@@ -113,12 +120,14 @@ export const FlatList = forwardRef<HTMLUListElement, Props>(
       itemGap: props.itemGap,
     });
 
-    // memo Data
+    //
+    // memoized Data
     const memoizedData = useMemo(() => {
       if (data && (props?.dataCount ?? data.length) > 0) {
         return data
           .map((item, index) => (
             <li
+              className="flat-item"
               key={props.keyExtractor(item, index)}
               style={{
                 display: "flex",
@@ -151,8 +160,9 @@ export const FlatList = forwardRef<HTMLUListElement, Props>(
     return (
       <>
         <style>{scrollbarStyle}</style>
+        {props.ListHeaderComponent}
         <ul
-          className="customScrollbar"
+          className="flatList-items"
           ref={ref}
           style={{
             ...viewT,
@@ -160,19 +170,20 @@ export const FlatList = forwardRef<HTMLUListElement, Props>(
             ...displayThemes,
             position: "relative",
             listStyle: "none",
-            padding: 0,
-            margin: 0,
             overflow: "auto",
           }}
           {...rest}
         >
           {memoizedData}
         </ul>
+        {props.ListFooterComponent}
       </>
     );
   }
 );
 
+//
+// screen resize
 const GetSceenItemCount = ({
   itemHorizontalCount,
   direction,
