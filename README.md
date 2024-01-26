@@ -74,6 +74,7 @@ function App() {
       crossGap={15}
       padding={{ all: 16 }}
       margin={{ bottom: 20 }}
+      itemScrollActive={true} // Scroll Active
       listScrollbarView={false} // Scrollbar
     />
   );
