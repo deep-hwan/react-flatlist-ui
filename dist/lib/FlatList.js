@@ -32,9 +32,11 @@ exports.FlatList = (0, react_1.forwardRef)(function (props, ref) {
     var _p = (_a = props.size) !== null && _a !== void 0 ? _a : {}, _q = _p.width, width = _q === void 0 ? "100%" : _q, minWidth = _p.minWidth, maxWidth = _p.maxWidth;
     var _r = (_b = props.size) !== null && _b !== void 0 ? _b : {}, _s = _r.height, height = _s === void 0 ? "100%" : _s, minHeight = _r.minHeight, maxHeight = _r.maxHeight;
     var _t = (_c = props.display) !== null && _c !== void 0 ? _c : {}, reverse = _t.reverse, _u = _t.wrap, wrap = _u === void 0 ? "wrap" : _u, crossAlign = _t.crossAlign;
-    var _v = props.direction, direction = _v === void 0 ? "vertical" : _v, listScrollbarView = props.listScrollbarView, _w = props.padding, padding = _w === void 0 ? { all: 0 } : _w, _x = props.margin, margin = _x === void 0 ? { all: 0 } : _x;
+    var _v = props.direction, direction = _v === void 0 ? "vertical" : _v, listScrollbarView = props.listScrollbarView, _w = props.padding, padding = _w === void 0 ? { all: 0 } : _w, margin = props.margin;
     var viewT = { width: width, height: height, minWidth: minWidth, maxWidth: maxWidth, minHeight: minHeight, maxHeight: maxHeight };
     var spaceT = (0, space_1.SpaceTheme)({ padding: padding, margin: margin });
+    //
+    // direction_variants
     var FLEX_VARIANTS = {
         horizontal: {
             flexDirection: reverse ? "row-reverse" : "row",
@@ -51,6 +53,7 @@ exports.FlatList = (0, react_1.forwardRef)(function (props, ref) {
             columnGap: (_j = props.itemCrossGap) !== null && _j !== void 0 ? _j : 10,
         },
     };
+    //
     // displayTheme
     var displayThemes = {
         display: "flex",
@@ -61,20 +64,23 @@ exports.FlatList = (0, react_1.forwardRef)(function (props, ref) {
         rowGap: (_m = FLEX_VARIANTS[direction].rowGap) !== null && _m !== void 0 ? _m : 0,
         columnGap: (_o = FLEX_VARIANTS[direction].columnGap) !== null && _o !== void 0 ? _o : 0,
     };
+    //
     // scrollTheme
     var scrollbarStyle = "\n.customScrollbar::-webkit-scrollbar {\n  display: ".concat(listScrollbarView ? "flex" : "none", ";\n  width: 5px;\n  height: 5px;\n}\n.customScrollbar::-webkit-scrollbar-track {\n  background-color: transparent;\n}\n.customScrollbar::-webkit-scrollbar-thumb {\n  background-color: #cccccc;\n  border-radius: 100px;\n}\n.customScrollbar::-webkit-scrollbar-thumb:hover {\n  background: #e2e2e2;\n}\n.customScrollbar::-webkit-scrollbar-button:start:decrement,\n.customScrollbar::-webkit-scrollbar-button:end:increment {\n  width: 0;\n  height: 0;\n  background-color: transparent;\n}\n");
+    //
     // item Count
     var listItemCountThemes = GetSceenItemCount({
         itemHorizontalCount: itemHorizontalCount,
         direction: direction,
         itemGap: props.itemGap,
     });
-    // memo Data
+    //
+    // memoized Data
     var memoizedData = (0, react_1.useMemo)(function () {
         var _a;
         if (data && ((_a = props === null || props === void 0 ? void 0 : props.dataCount) !== null && _a !== void 0 ? _a : data.length) > 0) {
             return data
-                .map(function (item, index) { return ((0, jsx_runtime_1.jsxs)("li", __assign({ style: __assign(__assign({ display: "flex", flexDirection: "column", alignItems: "start" }, listItemCountThemes), { transition: "0.3s ease-in-out", padding: 0, margin: 0 }) }, { children: [renderItem(item, index), props.ItemSeparatorComponent] }), props.keyExtractor(item, index))); })
+                .map(function (item, index) { return ((0, jsx_runtime_1.jsxs)("li", __assign({ className: "flat-item", style: __assign(__assign({ display: "flex", flexDirection: "column", alignItems: "start" }, listItemCountThemes), { transition: "0.3s ease-in-out", padding: 0, margin: 0 }) }, { children: [renderItem(item, index), props.ItemSeparatorComponent] }), props.keyExtractor(item, index))); })
                 .flat();
         }
         else {
@@ -89,8 +95,10 @@ exports.FlatList = (0, react_1.forwardRef)(function (props, ref) {
         props.dataCount,
         props.ListEmptyComponent,
     ]);
-    return ((0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("style", { children: scrollbarStyle }), (0, jsx_runtime_1.jsx)("ul", __assign({ className: "customScrollbar", ref: ref, style: __assign(__assign(__assign(__assign({}, viewT), spaceT), displayThemes), { position: "relative", listStyle: "none", padding: 0, margin: 0, overflow: "auto" }) }, rest, { children: memoizedData }))] }));
+    return ((0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("style", { children: scrollbarStyle }), props.ListHeaderComponent, (0, jsx_runtime_1.jsx)("ul", __assign({ className: "flatList-items", ref: ref, style: __assign(__assign(__assign(__assign({}, viewT), spaceT), displayThemes), { position: "relative", listStyle: "none", overflow: "auto" }) }, rest, { children: memoizedData })), props.ListFooterComponent] }));
 });
+//
+// screen resize
 var GetSceenItemCount = function (_a) {
     var _b, _c, _d;
     var itemHorizontalCount = _a.itemHorizontalCount, direction = _a.direction, _e = _a.itemGap, itemGap = _e === void 0 ? 10 : _e;

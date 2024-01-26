@@ -11,7 +11,9 @@ interface Props extends HTMLAttributes<HTMLUListElement>, SpaceType {
     };
     keyExtractor: (item?: any, index?: number) => string | number;
     renderItem: (item?: any, index?: number) => ReactElement;
+    ListFooterComponent?: ReactElement;
     ItemSeparatorComponent?: ReactElement;
+    ListHeaderComponent?: ReactElement;
     ListEmptyComponent?: ReactElement;
     size?: ViewportTypes;
     listScrollbarView?: boolean;

@@ -19,12 +19,12 @@ export interface SpaceType {
     };
 }
 export declare const SpaceTheme: ({ padding, margin }: SpaceType) => {
-    paddingTop: string | number | undefined;
-    paddingBottom: string | number | undefined;
-    paddingLeft: string | number | undefined;
-    paddingRight: string | number | undefined;
-    marginTop: string | number | undefined;
-    marginBottom: string | number | undefined;
-    marginLeft: string | number | undefined;
-    marginRight: string | number | undefined;
+    paddingTop: string | number;
+    paddingBottom: string | number;
+    paddingLeft: string | number;
+    paddingRight: string | number;
+    marginTop: string | number;
+    marginBottom: string | number;
+    marginLeft: string | number;
+    marginRight: string | number;
 };

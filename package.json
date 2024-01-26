@@ -1,14 +1,19 @@
 {
   "name": "react-flatlist-ui",
-  "version": "1.1.0",
+  "version": "1.1.4",
   "private": false,
   "files": [
     "dist",
     "README.md"
   ],
   "main": "dist/lib/index.js",
+  "module": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
   "browser": "./browser/specific/main.js",
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^6.3.0",
     "@testing-library/react": "^14.1.2",
@@ -19,16 +24,27 @@
     "@types/react-dom": "^18.2.18",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-flatlist-ui": "^1.0.5",
+    "react-flatlist-ui": "^1.1.4",
     "react-scripts": "5.0.1",
     "typescript": "^4.9.5",
+    "vite": "^5.0.12",
     "web-vitals": "^3.5.1"
   },
+  "exports": {
+    ".": {
+      "import": "./dist/lib/index.js",
+      "require": "./dist/lib/index.js",
+      "default": "./dist/lib/index.js"
+    }
+  },
   "scripts": {
+    "dev": "vite",
     "clean": "rimraf dist",
     "compile": "npm run clean && cross-env NODE_ENV=production babel src/lib --out-dir dist --copy-files",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "tsc && vite build --base=./",
+    "build:cjs": "babel src --out-dir dist/cjs --copy-files --env-name cjs",
+    "build:esm": "babel src --out-dir dist/esm --copy-files --env-name esm",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prepare": "rimraf dist && mkdir dist && tsc"
@@ -65,5 +81,8 @@
     "flatlist"
   ],
   "author": "deep",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "vite-plugin-dts": "^3.7.2"
+  }
 }
