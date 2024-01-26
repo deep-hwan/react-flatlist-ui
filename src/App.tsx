@@ -22,8 +22,10 @@ export default function App() {
         }}
       >
         <FlatList
+          direction="horizontal"
+          display={{ wrap: "nowrap" }}
           itemHorizontalCount={{ desktop: 3, tablet: 2, mobile: 1 }}
-          padding={{ all: 16 }}
+          padding={{ vertical: 16 }}
           margin={{ bottom: 20 }}
           data={dummyData}
           dataCount={dummyData.length}
@@ -31,6 +33,8 @@ export default function App() {
           ListFooterComponent={<span>data finish ...</span>}
           ListEmptyComponent={<p>데이터가 존재하지 않습니다</p>}
           keyExtractor={(i) => i}
+          // listScrollbarView
+          // listScrollActive
           renderItem={(item) => (
             <div
               style={{

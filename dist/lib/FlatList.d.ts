@@ -17,6 +17,7 @@ interface Props extends HTMLAttributes<HTMLUListElement>, SpaceType {
     ListEmptyComponent?: ReactElement;
     size?: ViewportTypes;
     listScrollbarView?: boolean;
+    listScrollActive?: boolean;
     itemGap?: number;
     itemCrossGap?: number;
     direction?: "horizontal" | "vertical";

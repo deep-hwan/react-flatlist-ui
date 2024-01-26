@@ -22,6 +22,7 @@ interface Props extends HTMLAttributes<HTMLUListElement>, SpaceType {
   ListEmptyComponent?: ReactElement;
   size?: ViewportTypes;
   listScrollbarView?: boolean;
+  listScrollActive?: boolean;
   itemGap?: number;
   itemCrossGap?: number;
   direction?: "horizontal" | "vertical";
@@ -44,10 +45,11 @@ export const FlatList = forwardRef<HTMLUListElement, Props>(
     const { data, renderItem, itemHorizontalCount, ...rest } = props;
     const { width = "100%", minWidth, maxWidth } = props.size ?? {};
     const { height = "100%", minHeight, maxHeight } = props.size ?? {};
-    const { reverse, wrap = "wrap", crossAlign } = props.display ?? {};
+    const { reverse, wrap = "wrap", align, crossAlign } = props.display ?? {};
     const {
       direction = "vertical",
-      listScrollbarView,
+      listScrollActive = false,
+      listScrollbarView = false,
       padding = { all: 0 },
       margin,
     } = props;
@@ -60,7 +62,7 @@ export const FlatList = forwardRef<HTMLUListElement, Props>(
     const FLEX_VARIANTS = {
       horizontal: {
         flexDirection: reverse ? ("row-reverse" as const) : ("row" as const),
-        align: (props.display && props.display.align) ?? "stretch",
+        align: align ?? "stretch",
         rowGap: props.itemCrossGap ?? 10,
         columnGap: props.itemGap ?? 10,
       },
@@ -68,7 +70,7 @@ export const FlatList = forwardRef<HTMLUListElement, Props>(
         flexDirection: reverse
           ? ("column-reverse" as const)
           : ("column" as const),
-        align: (props.display && props.display.align) ?? "flex-start",
+        align: align ?? "flex-start",
         rowGap: props.itemGap ?? 10,
         columnGap: props.itemCrossGap ?? 10,
       },
@@ -78,7 +80,10 @@ export const FlatList = forwardRef<HTMLUListElement, Props>(
     // displayTheme
     const displayThemes = {
       display: "flex",
-      flexWrap: wrap === "wrap" && reverse ? "wrap-reverse" : wrap,
+      flexWrap:
+        (reverse && "wrap-reverse") ||
+        (direction === "horizontal" && "wrap") ||
+        wrap,
       justifyContent: crossAlign,
       flexDirection: FLEX_VARIANTS[direction].flexDirection ?? "column",
       alignItems: FLEX_VARIANTS[direction].align ?? "start",
@@ -89,23 +94,23 @@ export const FlatList = forwardRef<HTMLUListElement, Props>(
     //
     // scrollTheme
     const scrollbarStyle = `
-.customScrollbar::-webkit-scrollbar {
-  display: ${listScrollbarView ? "flex" : "none"};
+.flatList-items::-webkit-scrollbar {
+  display: ${listScrollbarView ? "flex" : "none !important"};
   width: 5px;
   height: 5px;
 }
-.customScrollbar::-webkit-scrollbar-track {
+.flatList-items::-webkit-scrollbar-track {
   background-color: transparent;
 }
-.customScrollbar::-webkit-scrollbar-thumb {
+.flatList-items::-webkit-scrollbar-thumb {
   background-color: #cccccc;
   border-radius: 100px;
 }
-.customScrollbar::-webkit-scrollbar-thumb:hover {
+.flatList-items::-webkit-scrollbar-thumb:hover {
   background: #e2e2e2;
 }
-.customScrollbar::-webkit-scrollbar-button:start:decrement,
-.customScrollbar::-webkit-scrollbar-button:end:increment {
+.flatList-items::-webkit-scrollbar-button:start:decrement,
+.flatList-items::-webkit-scrollbar-button:end:increment {
   width: 0;
   height: 0;
   background-color: transparent;
@@ -130,11 +135,10 @@ export const FlatList = forwardRef<HTMLUListElement, Props>(
               className="flat-item"
               key={props.keyExtractor(item, index)}
               style={{
+                ...listItemCountThemes,
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "start",
-                ...listItemCountThemes,
-                transition: "0.3s ease-in-out",
                 padding: 0,
                 margin: 0,
               }}
@@ -170,7 +174,7 @@ export const FlatList = forwardRef<HTMLUListElement, Props>(
             ...displayThemes,
             position: "relative",
             listStyle: "none",
-            overflow: "auto",
+            overflow: listScrollActive ? "auto" : "visible !important",
           }}
           {...rest}
         >
