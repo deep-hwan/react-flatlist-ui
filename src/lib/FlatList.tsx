@@ -12,6 +12,7 @@ import { ViewportTypes } from "../themes/viewport";
 
 interface Props extends HTMLAttributes<HTMLUListElement>, SpaceType {
   data: any[];
+  loading?: boolean;
   dataCount?: number;
   itemHorizontalCount?: { desktop?: number; tablet?: number; mobile?: number };
   keyExtractor: (item?: any, index?: number) => string | number;
@@ -20,6 +21,7 @@ interface Props extends HTMLAttributes<HTMLUListElement>, SpaceType {
   ItemSeparatorComponent?: ReactElement;
   ListHeaderComponent?: ReactElement;
   ListEmptyComponent?: ReactElement;
+  ListLoadingComponent?: ReactElement;
   size?: ViewportTypes;
   listScrollbarView?: boolean;
   listScrollActive?: boolean;
@@ -165,21 +167,34 @@ export const FlatList = forwardRef<HTMLUListElement, Props>(
       <>
         <style>{scrollbarStyle}</style>
         {props.ListHeaderComponent}
-        <ul
-          className="flatList-items"
-          ref={ref}
-          style={{
-            ...viewT,
-            ...spaceT,
-            ...displayThemes,
-            position: "relative",
-            listStyle: "none",
-            overflow: listScrollActive ? "auto" : "visible !important",
-          }}
-          {...rest}
-        >
-          {memoizedData}
-        </ul>
+        {props.loading ? (
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            {props.ListLoadingComponent}
+          </div>
+        ) : (
+          <ul
+            className="flatList-items"
+            ref={ref}
+            style={{
+              ...viewT,
+              ...spaceT,
+              ...displayThemes,
+              position: "relative",
+              listStyle: "none",
+              overflow: listScrollActive ? "auto" : "visible !important",
+            }}
+            {...rest}
+          >
+            {memoizedData}
+          </ul>
+        )}
         {props.ListFooterComponent}
       </>
     );

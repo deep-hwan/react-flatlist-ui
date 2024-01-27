@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { FlatList } from "./lib/FlatList";
 
 export default function App() {
+  const [loading, setLoading] = useState(true);
+
   return (
     <div
       className="App"
@@ -29,6 +31,8 @@ export default function App() {
           margin={{ bottom: 20 }}
           data={dummyData}
           dataCount={dummyData.length}
+          loading={loading}
+          ListLoadingComponent={<p>loading...</p>}
           ListHeaderComponent={<h1>Title: FlatList</h1>}
           ListFooterComponent={<span>data finish ...</span>}
           ListEmptyComponent={<p>데이터가 존재하지 않습니다</p>}
