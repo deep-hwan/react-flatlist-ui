@@ -97,7 +97,12 @@ exports.FlatList = (0, react_1.forwardRef)(function (props, ref) {
         props.dataCount,
         props.ListEmptyComponent,
     ]);
-    return ((0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("style", { children: scrollbarStyle }), props.ListHeaderComponent, (0, jsx_runtime_1.jsx)("ul", __assign({ className: "flatList-items", ref: ref, style: __assign(__assign(__assign(__assign({}, viewT), spaceT), displayThemes), { position: "relative", listStyle: "none", overflow: listScrollActive ? "auto" : "visible !important" }) }, rest, { children: memoizedData })), props.ListFooterComponent] }));
+    return ((0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("style", { children: scrollbarStyle }), props.ListHeaderComponent, props.loading ? ((0, jsx_runtime_1.jsx)("div", __assign({ style: {
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                } }, { children: props.ListLoadingComponent }))) : ((0, jsx_runtime_1.jsx)("ul", __assign({ className: "flatList-items", ref: ref, style: __assign(__assign(__assign(__assign({}, viewT), spaceT), displayThemes), { position: "relative", listStyle: "none", overflow: listScrollActive ? "auto" : "visible !important" }) }, rest, { children: memoizedData }))), props.ListFooterComponent] }));
 });
 //
 // screen resize

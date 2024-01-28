@@ -3,6 +3,7 @@ import { SpaceType } from "../themes/space";
 import { ViewportTypes } from "../themes/viewport";
 interface Props extends HTMLAttributes<HTMLUListElement>, SpaceType {
     data: any[];
+    loading?: boolean;
     dataCount?: number;
     itemHorizontalCount?: {
         desktop?: number;
@@ -15,6 +16,7 @@ interface Props extends HTMLAttributes<HTMLUListElement>, SpaceType {
     ItemSeparatorComponent?: ReactElement;
     ListHeaderComponent?: ReactElement;
     ListEmptyComponent?: ReactElement;
+    ListLoadingComponent?: ReactElement;
     size?: ViewportTypes;
     listScrollbarView?: boolean;
     listScrollActive?: boolean;
