@@ -212,7 +212,19 @@ const GetSceenItemCount = ({
   direction?: "horizontal" | "vertical";
   itemGap?: number;
 }) => {
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [screenWidth, setScreenWidth] = useState(0);
+
+  useEffect(() => {
+    // This code runs after component mounts, ensuring window is available
+    setScreenWidth(window.innerWidth);
+
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const desktopCount = itemHorizontalCount?.desktop ?? 1;
   const tabletCount = itemHorizontalCount?.tablet ?? 1;

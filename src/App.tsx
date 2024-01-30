@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FlatList } from "./lib/FlatList";
 
 export default function App() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   return (
     <div

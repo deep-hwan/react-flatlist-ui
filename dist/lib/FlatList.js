@@ -109,7 +109,16 @@ exports.FlatList = (0, react_1.forwardRef)(function (props, ref) {
 var GetSceenItemCount = function (_a) {
     var _b, _c, _d;
     var itemHorizontalCount = _a.itemHorizontalCount, direction = _a.direction, _e = _a.itemGap, itemGap = _e === void 0 ? 10 : _e;
-    var _f = (0, react_1.useState)(window.innerWidth), screenWidth = _f[0], setScreenWidth = _f[1];
+    var _f = (0, react_1.useState)(0), screenWidth = _f[0], setScreenWidth = _f[1];
+    (0, react_1.useEffect)(function () {
+        // This code runs after component mounts, ensuring window is available
+        setScreenWidth(window.innerWidth);
+        var handleResize = function () {
+            setScreenWidth(window.innerWidth);
+        };
+        window.addEventListener("resize", handleResize);
+        return function () { return window.removeEventListener("resize", handleResize); };
+    }, []);
     var desktopCount = (_b = itemHorizontalCount === null || itemHorizontalCount === void 0 ? void 0 : itemHorizontalCount.desktop) !== null && _b !== void 0 ? _b : 1;
     var tabletCount = (_c = itemHorizontalCount === null || itemHorizontalCount === void 0 ? void 0 : itemHorizontalCount.tablet) !== null && _c !== void 0 ? _c : 1;
     var mobileCount = (_d = itemHorizontalCount === null || itemHorizontalCount === void 0 ? void 0 : itemHorizontalCount.mobile) !== null && _d !== void 0 ? _d : 1;
