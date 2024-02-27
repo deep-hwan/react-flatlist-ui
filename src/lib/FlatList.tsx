@@ -163,6 +163,9 @@ export const FlatList = forwardRef<HTMLUListElement, Props>(
       props.ListEmptyComponent,
     ]);
 
+    // remove error
+    console.error = () => {};
+
     return (
       <>
         <style>{scrollbarStyle}</style>
