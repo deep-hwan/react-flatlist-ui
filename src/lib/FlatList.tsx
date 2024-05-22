@@ -146,7 +146,10 @@ export const FlatList = forwardRef<HTMLUListElement, Props>(
               }}
             >
               {renderItem(item, index)}
-              {props.ItemSeparatorComponent}
+
+              {direction === "horizontal"
+                ? props.ItemSeparatorComponent
+                : index !== data.length - 1 && props.ItemSeparatorComponent}
             </li>
           ))
           .flat();

@@ -97,6 +97,8 @@ exports.FlatList = (0, react_1.forwardRef)(function (props, ref) {
         props.dataCount,
         props.ListEmptyComponent,
     ]);
+    // remove error
+    console.error = function () { };
     return ((0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("style", { children: scrollbarStyle }), props.ListHeaderComponent, props.loading ? ((0, jsx_runtime_1.jsx)("div", __assign({ style: {
                     width: "100%",
                     display: "flex",
